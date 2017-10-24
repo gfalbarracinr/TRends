@@ -10,10 +10,10 @@ font_import()
 
 
 #set up
-consumer_key <- 'VU5TjPWvxY1VklCHCvzjV8y7d'
-consumer_secret <- '0kB2QvfF5O1vzNJPWb3EYw5nkrZA5SnFZdjWK59nyKxfaJ40Q0'
-access_token <- '2499735859-dpPhtvFlDJ3JW3gfvryBMrNMOFrKB3FwqAlFqW0'
-access_secret <- 'U4M8Q8svpGWBK2orJpKO7hAntLaz0oJS130UqsD3255RZ'
+consumer_key <- 'your consumer_key'
+consumer_secret <- 'your consumer_secret'
+access_token <- 'your access_token'
+access_secret <- 'your access_secret'
 
 
 setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
