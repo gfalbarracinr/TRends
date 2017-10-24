@@ -1,0 +1,60 @@
+#libraries
+library(wordcloud)
+library(twitteR)
+library(tm)
+library(extrafont)
+font_import()
+
+
+#Functions
+
+
+#set up
+consumer_key <- 'VU5TjPWvxY1VklCHCvzjV8y7d'
+consumer_secret <- '0kB2QvfF5O1vzNJPWb3EYw5nkrZA5SnFZdjWK59nyKxfaJ40Q0'
+access_token <- '2499735859-dpPhtvFlDJ3JW3gfvryBMrNMOFrKB3FwqAlFqW0'
+access_secret <- 'U4M8Q8svpGWBK2orJpKO7hAntLaz0oJS130UqsD3255RZ'
+
+
+setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
+
+
+
+
+#main code
+location <- 368148
+#location <- readlines("Type a location to get trends")
+trends <-getTrends(location)
+
+#print(trends)
+
+tw_corpus <- Corpus(VectorSource(trends$name))
+
+#clean_words<-clean_words[-grep("http|@|#|ü|ä|ö", clean_words)]
+#clean_words<-clean_words[-grep("search", clean_words)]
+
+wordcloud(tw_corpus, min.freq=1,width=12,height=8, res=300)
+
+#### playing with the settings 
+
+wordcloud(tw_corpus, min.freq=1, vfont=c("serif", "plain"),width=12, height=8,res=300)
+wordcloud(tw_corpus, min.freq=1, vfont=c("script", "plain"),width=12, height=8,res=300)
+wordcloud(tw_corpus, min.freq=1, vfont=c("gothic italian", "plain"), width=12,height=8, res=300)
+
+
+pal<-brewer.pal(7, "Pastel1")
+par(bg="darkgray")
+wordcloud(tw_corpus, min.freq=1, vfont=c("script", "plain"), colors=pal, width=12,height=8, res=300)
+
+#### feature image
+
+pal<-brewer.pal(7, "Dark2")
+par(bg="lightgray")
+wordcloud(tw_corpus, min.freq=1, vfont=c("script", "plain"), colors=pal, width=12,height=8, res=300)
+
+
+
+#df <- data.frame(text=unlist(sapply(tw_corpus, '[', "content")), stringAsFactors=F)
+write.csv(trends, file="trendTweets.csv")
+
+
